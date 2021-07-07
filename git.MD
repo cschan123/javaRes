@@ -36,9 +36,17 @@ mkdir 创建文件夹
 
 远程库地址
 
-git remote -v 查看    git remote add origin (远程库地址)  这是给远程库起别名 为：origin
+git remote -v 查看    
+
+git remote add origin (远程库地址)  这是给远程库起别名 为：origin
 
 往远程库推送  git push origin master
 
 生成ssh公钥ssh-keygen -t rsa -C "13545028051@163.com"
+
+
+
+提交文件夹 git add GitResp   跟提交文件一样
+
+
 
