@@ -37,10 +37,17 @@ mkdir 创建文件夹
 远程库地址
 
 git remote -v 查看    
+<<<<<<< HEAD
 
 git remote add origin (远程库地址)  这是给远程库起别名 为：origin
+=======
+>>>>>>> 966a74e (git集成idea)
 
-往远程库推送  git push origin master
+git remote add origin (远程库地址)  
+
+这是给远程库起别名 为：origin、javaRes
+
+**往远程库推送  git push origin master**
 
 生成ssh公钥ssh-keygen -t rsa -C "13545028051@163.com"
 
@@ -48,5 +55,25 @@ git remote add origin (远程库地址)  这是给远程库起别名 为：origi
 
 提交文件夹 git add GitResp   跟提交文件一样
 
+<<<<<<< HEAD
 
+=======
+git clone 地址
+
+2、抓取远程库master分支 到本地库 ，工作区看不到
+
+git fetch origin master 
+
+3、 拉去别人上传到远程库的东西 跟clone很像
+
+git pull origin master
+
+4、免密操作
+
+ssh
+
+
+
+ 
+>>>>>>> 966a74e (git集成idea)
 
