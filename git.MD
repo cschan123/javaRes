@@ -102,3 +102,5 @@ ssh
 
 4) push 远程库 git push javaRes master
 
+5)查看远程库名字 git remote -v
+
