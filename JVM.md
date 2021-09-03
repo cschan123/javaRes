@@ -118,6 +118,23 @@ Java堆是垃圾收集器管理的主要区域，叫GC堆；
 
 在大量使用反射、动态代理、CGLib等ByteCode框架、动态生成JSP以及OSGi这类频繁自定义ClassLoader的场景都需要虚拟机具备类卸载的功能，以保证永久代（方法区）不会溢出。
 
+5、**深拷贝、浅拷贝**
+
+浅拷贝随着复制给别人，随着值改变而改变；
+
+深拷贝随着复制给别人，随着值改变而不改变；
+
+实现方式：
+
+```java
+private Object deepCopyByJson(Object obj) {
+     String json = JSON.toJSONString(obj);
+     return JSON.parseObject(json, Object.class);
+ }
+```
+
+
+
 #### 3.3 垃圾收集算法
 
 **标记-清除算法**
