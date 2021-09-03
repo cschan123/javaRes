@@ -6,7 +6,7 @@
 
 （3）持久层----MyBatis
 
-### 一、MyBastis 入门
+## 一、MyBastis 入门
 
 第一个项目：
 
@@ -221,9 +221,11 @@ ${}表示连接 ，也就是Java的+
 
 
 
-### 二、Spring
+## 二、Spring
 
 spring容器，核心IOC控制反转，AOP面向切面
+
+### 2 IOC控制反转
 
 #### 2.1、IOC控制反转
 
@@ -410,7 +412,7 @@ applicationContext.xml
 <import resource = "classpath:Spring-*.xml"/>
 ```
 
-#### 2.4.2 基于注解的注入
+#### 2.4.2 基于注解的注入，（简单方便，但是有点乱，快）
 
 @override
 
@@ -450,6 +452,7 @@ value赋值
 在Student.java中
 
 ```java
+//简单类型赋值
 @Value("${myname}")
 ```
 
@@ -488,5 +491,145 @@ private School school;
 
 ```xml
 @Resource(name="mySchool")//使用byName赋值
+@Autowired 默认bytype
+@Autowired @Qualifier 使用byname
 ```
+
+#### 2.5 IOC总结：
+
+IOC：管理对象，把对象放在容器中，创建、赋值、管理依赖关系
+
+IOC：通过管理对象，实现解耦合，IOC解决处理业务逻辑对象之间的耦合关系，也就是service和dao之间的解耦。
+
+spring作为容器适合管理什么对象？
+
+- service对象，dao对象
+- 工具类对象
+
+不适合交给spring的对象？
+
+- 实体类
+- servlet，listener，filter等web对象，是由tomcat管理
+
+### 3 AOP面向切面
+
+减少重复，专注业务
+
+什么是AOP（Aspect Orient Programming）？面向切面编程；
+
+Aspect:增加功能叫切面,切面一般都是非业务功能，而且切面功能一般都是可以复用，例如日志功能，事务功能，权限检查，参数检查，统计信息。
+
+Orient :面向
+
+Programming：编程
+
+**怎么理解AOP？以切面为核心开发**
+
+1. 设计项目，找出切面功能
+2. 安排切面执行时间和位置。
+
+**AOP作用？**
+
+1. 让切面功能复用
+2. 专注业务逻辑
+3. 实现业务功能和其他非业务功能解耦合
+4. 给存在的业务方法，增加功能，不用修改原来的代码
+
+**AOP术语**
+
+Aspect切面：给业务方法增加的功能
+
+JoinPoint连接点：连接切面的业务方法。在这个业务方法执行时，会同时执行切面方法。
+
+PointCut切入点：是一个或多个连接点集合。表示这些方法执行时，都能增加切面的功能
+
+target目标对象：给那个对象增加切面功能，这个对象就是目标对象
+
+advice：通知（增强），表示切面的执行时间，在目标方法之前执行切面，还是目标方法之后执行切面
+
+**重要的是三个要素**
+
+APsect，pointcut，advice，在advice的时间，在pointcut的位置，执行aspect
+
+AOP想等于动态代理，程序运行期间，创建代理，使用代理执行方法时，增加切面的功能，这个代理对象存在内存中。
+
+**什么时候使用AOP**
+
+- 给业务方法增加非业务功能
+- 给某些方法增加相同的功能
+
+**AOP技术思想的实现**
+
+使用框架实现AOP
+
+- Spring：实现AOP思想的部分功能，比较繁琐
+- Aspectj：独立的框架，专门AOP，属于Eclipse
+
+### 使用AspectJ框架实现AOP
+
+AspectJ框架可以使用注解和xml配置文件两种方式实现AOP
+
+**通知注解**
+
+- @before：前置通知
+- @AfterReturning：后置通知
+- Around：环绕通知
+- AfterThrowing：异常通知
+- After：最终通知
+
+**Pointcut位置**
+
+- aspectJ专门定义表达式用于指定切入点：execution (访问修饰符，返回值 方法名（参数）)
+- public * * （··） 任意方法
+- execution（void dosome（String，Integer））
+
+使用aspectj框架的注解，实现前置通知
+
+实现步骤：
+
+1. 新建maven项目
+2. 修改pom.xml  ，加入依赖 spring-context，spring-aspects junit
+3. 创建业务接口和实现类
+4. 创建一个切面类，是一个普通类
+   1. 在类的上面加入@Aspect
+   2. 在类中定义方法，方法表示切面的功能，在方法的上面加入Aspect注解，例如@Before（vaLue="切入点表达式"）
+5. 创建spring配置文件
+   1. 声明目标对象
+   2. 声明切面类对象
+   3. 声明自动代理生成器
+6. 创建测试类，测试目标方法执行时，增加切面的功能
+
+## 三、SpringMVC入门
+
+
+
+## 四、Redis 入门
+
+![image-20210726002640033](C:\Users\CS_Chan\AppData\Roaming\Typora\typora-user-images\image-20210726002640033.png)
+
+![image-20210821165701801](C:\Users\CS_Chan\AppData\Roaming\Typora\typora-user-images\image-20210821165701801.png)
+
+**![image-20210821165720319](C:\Users\CS_Chan\AppData\Roaming\Typora\typora-user-images\image-20210821165720319.png)**
+
+## 五、整合SSM
+
+1、创建maven web项目
+
+2、修改pom.xml 加入依赖 Spring SpringMVC mybatis,mybatis-spring druid,jackson，mysql驱动
+
+3、写web.xml：声明容器对象
+
+​	1）声明Spring的监听器contextLoaderListener:创建Spring的容器对象，创建service，dao对象
+
+​	2）声明SpringMVC的中央调度器DispatchServlet：创建springMVC容器对象，创建controller对象
+
+​	3）声明字符集的过滤器CharacterEncodingFilter，解决post请求乱码的问题
+
+4、创建程序中的包，dao，service，controller，entity
+
+5、写Spring、springMVC，mybatis配置文件
+
+6、写java代码，实体类，dao接口，mapper文件，service类，controller类，使用注解声明对象和赋值
+
+7、创建视图文件，各种jsp
 
