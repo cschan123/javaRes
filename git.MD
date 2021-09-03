@@ -85,3 +85,20 @@ ssh
 
 1. 使用 `git commit --amend` 命令修订当前的提交
 2. 使用 `git rebase --continue` 命令继续代码的提交(推荐),执行之后,需要重新提交,解决一下当前的代码冲突之后重新提交直至没有`rebase`提示,就可以正常提交了
+
+
+
+
+
+
+
+最常用的git 命令操作
+
+1）先看git status
+
+2）提交 git add .  提交所有文件   
+
+3）传到本地库  git commit -m [mseeage]
+
+4) push 远程库 git push javaRes master
+
